@@ -8,3 +8,5 @@ def find_smallest_product(max_factor):
             if candidate % max_factor == 0:
                 return candidate
             candidate += previous
+
+print(find_smallest_product(20))
