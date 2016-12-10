@@ -13,3 +13,5 @@ def find_prime_factors(num):
         factor = find_smallest_factor(num)
     factors.append(int(factor))
     return factors
+
+print(find_prime_factors(600851475143)[-1])
