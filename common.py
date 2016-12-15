@@ -15,8 +15,8 @@ def find_prime_factors(num):
         factor = find_smallest_factor(num)
     factors.append(int(factor))
     return factors
-    
-def sieve_of_eratosthenes(max_num):#v fast right now
+
+def sieve_of_eratosthenes(max_num):
     primes = []
     candidates = {n: True for n in range(2, max_num)}
     for p in range(2, max_num):
@@ -26,22 +26,26 @@ def sieve_of_eratosthenes(max_num):#v fast right now
                 candidates[n] = False
     return primes
 
-def sieve_of_sundaram(max_num):#v slow right now, consult primer
+def sieve_of_sundaram(max_num):
     new_max = int(max_num/2)
-    base_candidates = [n for n in range(1, new_max)]
+    primes = []
+    candidates = {n: True for n in range(1, new_max)}
     for i in range(1, new_max):
         for j in range(i, new_max):
             t = i+j+2*i*j
             if t > new_max:
                 break
-            if t in base_candidates and t < new_max:
-                base_candidates.remove(t)
+            if t in candidates and t < new_max:
+                candidates[t] = False
         if i**2 > new_max:
             break
-    primes = [2]+[2*n+1 for n in base_candidates]
+    primes = [2]
+    for n in candidates:
+        if candidates[n] == True:
+            primes.append(n*2+1)
     return primes
 
-def prime_wheel(starting_primes, max_num):#v slow right now, consult primer
+def prime_wheel(starting_primes, max_num):#currently doesn't work
     perimeter = 1
     for prime in starting_primes:
         perimeter *= prime

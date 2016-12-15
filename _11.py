@@ -24,10 +24,7 @@ grid = [[8, 2, 22, 97, 38, 15, 0, 4, 0, 75, 4, 5, 7, 78, 52, 12, 5, 77, 91, 8],
 def find_product(row, col, mods):
     product = 1
     for delta in range(4):
-        #print('row: %s, col: %s, delta: %s, rowd: %s, cold: %s' % (row, col, delta, row+delta*mods[0], col+delta*mods[1]))
         product *= grid[row+delta*mods[0]][col+delta*mods[1]]
-    #if col==16 and row==16:
-    #    print('16p: %s, %s' % (product, mods))
     return product
 
 def find_highest_product():
@@ -46,8 +43,8 @@ def find_highest_product():
                 p = find_product(row, col, [1, 1])#forward diagonal
                 if p > highest_product:
                     highest_product = p
-            if row > 2 and col > 2:
-                p = find_product(row, col, [-1, -1])#backward diagonal
+            if row < 17 and col > 2:
+                p = find_product(row, col, [1, -1])#backward diagonal
                 if p > highest_product:
                     highest_product = p
     return highest_product
