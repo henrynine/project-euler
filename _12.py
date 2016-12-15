@@ -18,7 +18,7 @@ def count_divisors(n):
 
     num_factors = 1
     for i in factor_counts.values():
-        num_factors *= i
+        num_factors *= (i+1)
 
     return num_factors
 
@@ -28,25 +28,12 @@ def triangle_number(n):
         total += num
     return total
 
-def time_count_divisors(max_n):
-    start = time.time()
-    n = 1
+most_divisors = (1, 1)
+n = 1
+while most_divisors[1] < 500:
     last_tri = triangle_number(n)
+    n += 1
     d = count_divisors(last_tri)
-    highest_c = 1
-    while n < max_n:
-        n += 1
-        last_tri = triangle_number(n)
-        d = count_divisors(last_tri)
-        if d > highest_c:
-            highest_c = d
-    end = time.time()
-    return 'highest_c: %s, time: %s' % (highest_c, end-start)
-
-
-#print(last_tri)
-def time_tri(n):
-    start = time.time()
-    tri = triangle_number(n)
-    end = time.time()
-    print('t = %s' % str(end-start))
+    if d > most_divisors[1]:
+        most_divisors = (last_tri, d)
+print(most_divisors[0])
