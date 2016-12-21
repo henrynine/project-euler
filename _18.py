@@ -1,4 +1,9 @@
 #go left is +0, go right is +1
+sample = [[3],
+          [7, 4,],
+          [2, 4, 6],
+          [8, 5, 9, 3]]
+
 triangle = [[75],
             [95, 64],
             [17, 47, 82],
@@ -22,11 +27,14 @@ so work up from second to bottom row then back down
 '''
 c = 0
 def get_highest_path(triangle, row, right):#returns [value, [path]]
+<<<<<<< HEAD
     global c, cache
     if (row, right) in cache:
         return cache[(row, right)]
     c += 1
     print(row, right)
+=======
+>>>>>>> parent of 39f39d3... start 67
     value = triangle[row][right]
     if row == len(triangle) - 1:#bottom row
         cache[(row, right)] = value
