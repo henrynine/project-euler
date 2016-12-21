@@ -1,6 +1,6 @@
-import math, time
+import math, time, operator, functools
 
-def find_smallest_factor(num):
+def find_smallest_factor(num):#assists find_prime_factors
     for potential_factor in range(2, int(num/2)+1):
         if num%potential_factor==0:
             return potential_factor
@@ -15,6 +15,22 @@ def find_prime_factors(num):
         factor = find_smallest_factor(num)
     factors.append(int(factor))
     return factors
+
+def get_binaries(l):#assists find_all_factors
+    base = lambda n: bin(n)[2:]
+    return ['0' * (l-len(base(n))) + base(n) for n in range(1, 2**l)]
+
+def find_all_factors(num):
+    prime_factors = find_prime_factors(num)
+    all_factors = [1]
+    for bin_code in get_binaries(len(prime_factors)):
+        factor = 1
+        for i in range(len(bin_code)):
+            if int(bin_code[i]):
+                factor *= prime_factors[i]
+        all_factors.append(factor)
+    all_factors.sort()
+    return all_factors
 
 def sieve_of_eratosthenes(max_num):
     primes = []
@@ -75,21 +91,3 @@ def brute_prime_filter(candidates):
         if is_prime(candidate):
             primes.append(candidate)
     return primes
-
-def test_sieve_of_eratosthenes(max_num):
-    start_time = time.time()
-    primes = sieve_of_eratosthenes(max_num)
-    end_time = time.time()
-    print('time: %s' % (end_time-start_time))
-
-def test_filtered_prime_wheel(base_max, max_num):
-    start_time = time.time()
-    primes = brute_prime_filter(prime_wheel(sieve_of_eratosthenes(base_max), max_num))
-    end_time = time.time()
-    print('time: %s' % (end_time-start_time))
-
-def test_sieve_of_sundaram(max_num):
-    start_time = time.time()
-    primes = sieve_of_sundaram(max_num)
-    end_time = time.time()
-    print('time: %s' % (end_time-start_time))
