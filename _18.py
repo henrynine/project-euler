@@ -1,9 +1,4 @@
 #go left is +0, go right is +1
-sample = [[3],
-          [7, 4,],
-          [2, 4, 6],
-          [8, 5, 9, 3]]
-
 triangle = [[75],
             [95, 64],
             [17, 47, 82],
@@ -24,6 +19,7 @@ find choice below with highest path itself, then take that
 so work up from second to bottom row then back down
 '''
 def get_highest_path(triangle, row, right):#returns [value, [path]]
+    print(row, right)
     value = triangle[row][right]
     if row == len(triangle) - 1:#bottom row
         return [triangle[row][right], []]#[value, [no path]
