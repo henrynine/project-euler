@@ -14,20 +14,31 @@ triangle = [[75],
             [91, 71, 52, 38, 17, 14, 91, 43, 58, 50, 27, 29, 48],
             [63, 66, 4, 68, 89, 53, 67, 30, 73, 16, 69, 87, 40, 31],
             [4, 62, 98, 27, 23, 9, 70, 98, 73, 93, 38, 53, 60, 4, 23]]
+
+cache = {}
 '''
 find choice below with highest path itself, then take that
 so work up from second to bottom row then back down
 '''
+c = 0
 def get_highest_path(triangle, row, right):#returns [value, [path]]
+    global c, cache
+    if (row, right) in cache:
+        return cache[(row, right)]
+    c += 1
     print(row, right)
     value = triangle[row][right]
     if row == len(triangle) - 1:#bottom row
-        return [triangle[row][right], []]#[value, [no path]
+        cache[(row, right)] = value
+        return [value, []]#[value, [no path]
     else:
-        left = get_highest_path(triangle, row+1, right)
-        right = get_highest_path(triangle, row+1, right+1)
-        if left[0] > right[0]:#left value is greater
-            return [value + left[0], [0] + left[1]]#return value of self and path with left step at this row
+        left_path = get_highest_path(triangle, row+1, right)
+        right_path = get_highest_path(triangle, row+1, right+1)
+        if left_path[0] > right_path[0]:#left value is greater
+            cache[(row, right)] = value + left_path[0]
+            return [value + left_path[0], [0] + left_path[1]]#return value of self and path with left step at this row
         else:#right value is greater
-            return [value + right[0], [1] + right[1]]#return value of self and path with right step at this row
+            cache[(row, right)] = value + right_path[0]
+            return [value + right_path[0], [1] + right_path[1]]#return value of self and path with right step at this row
 print(get_highest_path(triangle, 0, 0)[0])
+print('c: ' + str(c))
