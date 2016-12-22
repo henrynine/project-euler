@@ -6,25 +6,21 @@ r = 9 * (2**(2*n-1)) - 1
 where n > 1 is an integer and p, q, r are prime numbers, then (2**n)*p*q and (2**n)*r are amicable numbers
 '''
 
-max_num = 100
+max_num = 10000
 primes = common.sieve_of_eratosthenes(max_num)
 
-
-for n in range(2, max_num):
-    print(common.find_prime_factors(n)[:-1])
-
-factor_sums = {n: functools.reduce(lambda x, y: x+y, common.find_prime_factors(n)[:-1]) for n in range(4, max_num) if not n in primes}
-backwards_fs = {v: k for k, v in factor_sums.items()}
-print('fs: ' + str(factor_sums))
-print('bfs: ' +  str(backwards_fs))
+factor_sums = {n: functools.reduce(lambda x, y: x+y, common.find_all_factors(n)[:-1]) for n in range(4, max_num) if not n in primes}
 
 amicable_numbers = []
 
 for num in factor_sums:
-    pass
+    try:
+        opp = factor_sums[num]
+        if factor_sums[factor_sums[num]] == num and opp != num:
+            if num not in amicable_numbers:
+                amicable_numbers.append(num)
+                amicable_numbers.append(opp)
+    except KeyError:
+        pass
 
-total = 0
-for pair in find_amicable_numbers_max(max_num):
-    total += sum(pair)
-
-print(total)
+print(sum(amicable_numbers))

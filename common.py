@@ -29,6 +29,7 @@ def find_all_factors(num):
             if int(bin_code[i]):
                 factor *= prime_factors[i]
         all_factors.append(factor)
+    all_factors = list(set(all_factors))
     all_factors.sort()
     return all_factors
 
