@@ -1,4 +1,8 @@
 import math, time, operator, functools
+def fibonacci(n):
+    if n in [0, 1]:
+        return 1
+    return fibonacci(n-1) + fibonacci(n-2)
 
 def find_smallest_factor(num):#assists find_prime_factors
     for potential_factor in range(2, int(num/2)+1):
