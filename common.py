@@ -6,6 +6,12 @@ def find_smallest_factor(num):#assists find_prime_factors
             return potential_factor
     return num
 
+def find_factors(num):
+    l = list(set(functools.reduce(operator.add,
+              ([n, num//n] for n in range(1, int(math.sqrt(num)) + 1) if num%n==0))))
+    l.sort()
+    return l
+
 def find_prime_factors(num):
     factors = []
     factor = find_smallest_factor(num)
