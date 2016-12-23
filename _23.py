@@ -1,4 +1,4 @@
-import common, time, functools
+import common, time, functools, operator
 
 abundants = [n for n in range(1, 28123-12+1) if sum(common.find_factors(n)[:-1]) > n]
 total = 0
@@ -13,4 +13,4 @@ for n in abundants:
 
 non_sums = set(range(1, 28124)).difference(abundant_sums)
 
-print(functools.reduce(lambda x, y: x + y, non_sums))
+print(functools.reduce(operator.add, non_sums))

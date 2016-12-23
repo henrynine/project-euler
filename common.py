@@ -24,7 +24,7 @@ def find_prime_factors(num):
 
 def get_binaries(l):#assists find_all_factors
     base = lambda n: bin(n)[2:]
-    return ['0' * (l-len(base(n))) + base(n) for n in range(1, 2**l)]
+    return ['0' * (l-len(base(n))) + base(n) for n in range(2**l)]
 
 def find_all_factors(num):
     prime_factors = find_prime_factors(num)
