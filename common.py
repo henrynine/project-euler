@@ -1,4 +1,4 @@
-import math, time, operator, functools
+import math, time, operator, functools, decimal
 def slow_fibonacci(n):
     if n in [1, 2]:
         return 1
@@ -7,7 +7,16 @@ def slow_fibonacci(n):
 def fibonacci(n):
     phi1 = (1+math.sqrt(5))/2
     phi2 = (1-math.sqrt(5))/2
-    return round((phi1**n - phi2**n)/(math.sqrt(5)))
+    return round((phi1**n - phi2**n)/(dec(math.sqrt(5))))
+
+def big_fibonacci(n):
+    dec = decimal.Decimal
+    decimal.getcontext().prec = 1500#adjust if necessary
+    dec = decimal.Decimal
+    phi1 = dec((1+math.sqrt(5))/2)
+    phi2 = dec((1-math.sqrt(5))/2)
+
+    return round(dec((phi1**n - phi2**n))/dec((math.sqrt(5))))
 
 def find_smallest_factor(num):#assists find_prime_factors
     for potential_factor in range(2, int(num/2)+1):
